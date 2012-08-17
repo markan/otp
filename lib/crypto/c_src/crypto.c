@@ -768,27 +768,15 @@ static ERL_NIF_TERM hmac_init(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[
     const EVP_MD *md;
     
     if (argv[0] == atom_sha) md = EVP_sha1();
-    else if (argv[0] == atom_sha256) {
 #ifdef HAVE_SHA256
-            md = EVP_sha256();
-#else
-            return atom_notsup;
-#endif // HAVE_SHA256
-    }
-    else if (argv[0] == atom_sha384) {
+    else if (argv[0] == atom_sha256) md = EVP_sha256();
+#endif
 #ifdef HAVE_SHA384
-            md = EVP_sha384();
-#else
-            return atom_notsup;
-#endif // HAVE_SHA384
-    }
-    else if (argv[0] == atom_sha512) {
+    else if (argv[0] == atom_sha384) md = EVP_sha384();
+#endif 
 #ifdef HAVE_SHA512
-            md = EVP_sha512();
-#else
-            return atom_notsup;
-#endif // HAVE_SHA512
-    }
+    else if (argv[0] == atom_sha512) md = EVP_sha512();
+#endif 
     else if (argv[0] == atom_md5) md = EVP_md5();
     else if (argv[0] == atom_ripemd160) md = EVP_ripemd160();
     else goto badarg;
