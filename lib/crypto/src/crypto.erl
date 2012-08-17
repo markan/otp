@@ -294,7 +294,7 @@ sha512_final_nif(_Context) -> ?nif_stub.
 %%
 %%  HMAC (multiple hash options)
 %%
--spec hmac_init(atom(), iodata()) -> binary().                             
+-spec hmac_init(atom(), iodata()) -> binary() | notsup. 
 -spec hmac_update(binary(), iodata()) -> binary().
 -spec hmac_final(binary()) -> binary().                             
 -spec hmac_final_n(binary(), integer()) -> binary().                             
